@@ -37,3 +37,18 @@ def min_mag(data,mag_col):
     :returns: The min value of the column.
     """
     return data[mag_col].min()
+
+def calc_stat(lc, bands, mag_col):
+    """Calculate the max magnitude for each band of a lightcurve.
+
+    :param lc: dictionary of pd.DataFrame, one per band, keyed by band name.
+    :param bands: list of band names to calculate statistics for.
+    :param mag_col: a string with the name of the column holding the magnitudes.
+    :returns: dictionary with one entry per band, for example {"g_max": 20}.
+    """
+    # Define an empty dictionary where we will store the results
+    stat = {}
+    # For each band get the maximum value and store it in the dictionary
+    for b in bands:
+        stat[b + "_max"] = max_mag(lc[b], mag_col)
+    return stat
